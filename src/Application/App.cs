@@ -1,12 +1,17 @@
-﻿namespace Enterprise.Application
+﻿using System;
+using Enterprise.Domain;
+
+namespace Enterprise.Application
 {
-    public class App
+    public class App : BaseEntity
     {
     }
 
-    public class Edition
+    public class Edition : BaseEntity
     {
-        
+        public int AppId { get; set; }
+        public DateTime? LastUpdated { get; set; }
+        public virtual App App { get; set; }
     }
 
     public class Feature

@@ -1,6 +1,6 @@
-﻿using Enterprise.Application.Permission;
+﻿using Enterprise.Application.Permissions;
 
-namespace ESF.SaaS.Application.Permission
+namespace Enterprise.SaaS.Application.Permission
 {
     public class MultitenancyUserDataPermission : MultitenancyUserDataPermission<int, string, string>
     {

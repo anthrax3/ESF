@@ -1,6 +1,6 @@
 ﻿using Enterprise.Application.Permission;
 
-namespace ESF.SaaS.Application.Permission
+namespace Enterprise.SaaS.Application.Permission
 {
     public class MultitenancyRolePermission : MultitenancyRolePermission<int, string, string, string, string>
     {

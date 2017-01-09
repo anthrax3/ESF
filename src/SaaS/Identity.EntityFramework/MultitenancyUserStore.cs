@@ -36,7 +36,7 @@ namespace Enterprise.SaaS.Identity.EntityFramework
     /// <typeparam name="TUser">The type of user.</typeparam>
     /// <typeparam name="TRole">The type of role.</typeparam>
     /// <typeparam name="TKey">The type of <see cref="IdentityUser{TKey}.Id"/> for a user.</typeparam>
-    /// <typeparam name="TTenantKey">The type of <see cref="ITenant.TenantId"/> for a user.</typeparam>
+    /// <typeparam name="TTenantKey">The type of <see cref="ITenant{TTenantKey}.TenantId"/> for a user.</typeparam>
     /// <typeparam name="TUserLogin">The type of user login.</typeparam>
     /// <typeparam name="TUserRole">The type of user role.</typeparam>
     /// <typeparam name="TUserClaim">The type of user claim.</typeparam>

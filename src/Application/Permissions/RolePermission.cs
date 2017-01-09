@@ -1,6 +1,6 @@
 ﻿using Enterprise.Domain;
 
-namespace Enterprise.Application.Permission
+namespace Enterprise.Application.Permissions
 {
     public class RolePermission<TKey, TRoleKey, TPermission, TUserKey> : MutableModel<TKey, TUserKey>
     {
