@@ -3,7 +3,7 @@ using Enterprise.Domain;
 
 namespace Enterprise.Application
 {
-    public class App : BaseEntity
+    public class App : BaseEntity<Guid,string>
     {
     }
 

@@ -1,8 +1,9 @@
-﻿using Enterprise.Application.Permission;
+﻿using Enterprise.Application.Permissions;
+using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application.Permission
 {
-    public class MultitenancyRolePermission : MultitenancyRolePermission<int, string, string, string, string>
+    public class MultitenancyRolePermission : MultitenancyRolePermission<int, string, string, string, string>,ICreationInfo,IUpdatingInfo
     {
     }
 

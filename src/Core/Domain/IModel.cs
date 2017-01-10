@@ -71,6 +71,32 @@ namespace Enterprise.Domain
 
     }
 
+    public interface ICreationInfo
+    {
+        /// <summary>
+        ///   created datetime
+        /// </summary>
+        DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        ///     created by
+        /// </summary>
+        string CreatedBy { get; set; }
+    }
+
+    public interface IUpdatingInfo
+    {
+        /// <summary>
+        ///     updated by 
+        /// </summary>
+        string UpdatedBy { get; set; }
+
+        /// <summary>
+        ///    updated datetime
+        /// </summary>
+        DateTime? UpdatedDate { get; set; }
+    }
+
     public abstract class MutableModel<T, TUser> : ImmutableModel<T, TUser>
     {
         public virtual TUser UpdatedBy { get; set; }

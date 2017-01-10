@@ -1,8 +1,10 @@
-﻿using Enterprise.Application.Permissions;
+﻿using System;
+using Enterprise.Application.Permissions;
+using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application.Permission
 {
-    public class MultitenancyUserPermission : MultitenancyUserPermission<int, string, string, string>
+    public class MultitenancyUserPermission : MultitenancyUserPermission<int, string, string, string>,ICreationInfo,IUpdatingInfo
     {
     }
 

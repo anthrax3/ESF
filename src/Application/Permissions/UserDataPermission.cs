@@ -1,9 +1,15 @@
-﻿using Enterprise.Domain;
+﻿using System;
+using Enterprise.Domain;
 
 namespace Enterprise.Application.Permissions
 {
-    public class UserDataPermission<TKey, TUserKey> : ImmutableModel<TKey, TUserKey>
+    public class UserDataPermission<TKey, TUserKey> : MutableModel<TKey, TUserKey>
     {
+        public UserDataPermission()
+        {
+            CreatedDate = DateTime.Now;
+        }
+
         public TUserKey UserId { get; set; }
 
         /// <summary>

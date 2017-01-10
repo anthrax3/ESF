@@ -1,19 +1,8 @@
-﻿using Enterprise.Domain;
-
-namespace Enterprise.Application.Permissions
+﻿namespace Enterprise.Application.Permissions
 {
-    public class RolePermission<TKey, TRoleKey, TPermission, TUserKey> : MutableModel<TKey, TUserKey>
+    public class RolePermission<TKey, TRoleKey, TPermission, TUserKey>  : PermissionRelation<TKey, TRoleKey, TPermission, TUserKey>
     {
-        /// <summary>
-        ///     permission code
-        /// </summary>
-        public string Code { get; set; }
-
-        public TRoleKey RoleId { get; set; }
-
-        public TPermission PermissionId { get; set; }
-
-        public bool IsGranted { get; set; }
+        public TRoleKey RoleId => ReferenceId;
 
     }
 }
