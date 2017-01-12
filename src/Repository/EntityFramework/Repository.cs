@@ -170,7 +170,7 @@ namespace Enterprise.Repository.EntityFramework
 
             var repositoryType = typeof(Repository<>);
 
-            _repositories.Add(type, Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context, this));
+            _repositories.Add(type, Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context));
 
             return _repositories[type];
         }

@@ -112,7 +112,7 @@ namespace Enterprise.Repository
             this._outSideInstance = null;  // 若为内层UnitOfWork，此时的内层UnitOfWork失去和外层的关系，使该对象可以提交。
         }
 
-        protected void DisposeRepository()
+        protected virtual void DisposeRepository()
         {
             if (this._innerSideInstance.Count != 0)
             {

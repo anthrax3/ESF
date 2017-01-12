@@ -23,6 +23,10 @@ namespace Enterprise.Repository.EntityFramework
             _efContext = _context as EfContext;
         }
 
+
+        #region Overrides of UnitOfWork
+
+
         public override void BeginTransaction()
         {
            _transaction =  _efContext.DbContext.Database.BeginTransaction();
@@ -41,6 +45,20 @@ namespace Enterprise.Repository.EntityFramework
                 _context.SaveChanges();
         }
 
+
+        public override void Rollback()
+        {
+            _transaction.Rollback();
+        }
+
+        protected override void DisposeRepository()
+        {
+            base.DisposeRepository();
+            _repositories?.Clear();
+            _context?.Dispose();
+        }
+
+        #endregion
 
         public Task CommitAsync()
         {
@@ -73,10 +91,6 @@ namespace Enterprise.Repository.EntityFramework
             return _repositories[type];
         }
 
-        public override void Rollback()
-        {
-            _transaction.Rollback();
-        }
 
 
         public Task<int> SaveChangesAsync()
