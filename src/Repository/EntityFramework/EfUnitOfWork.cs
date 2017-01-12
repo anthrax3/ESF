@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage;
-using Enterprise.Repository;
 
 namespace Enterprise.Repository.EntityFramework
 {
@@ -17,7 +14,7 @@ namespace Enterprise.Repository.EntityFramework
         private Dictionary<string, dynamic> _repositories;
         private IDbContextTransaction _transaction;
 
-        public EfUnitOfWork(IRepositoryContextAsync context)
+        public EfUnitOfWork(EfContext context)
         {
             _context = context;
             _efContext = _context as EfContext;
@@ -55,6 +52,7 @@ namespace Enterprise.Repository.EntityFramework
         {
             base.DisposeRepository();
             _repositories?.Clear();
+           _transaction?.Dispose();
             _context?.Dispose();
         }
 
@@ -110,7 +108,10 @@ namespace Enterprise.Repository.EntityFramework
 
         public IUnitOfWorkAsync Start(IRepositoryContextAsync context)
         {
-            return new EfUnitOfWork(context);
+            var efContext = context as EfContext;
+            if (efContext == null)
+                throw new InvalidCastException("context must be EfContext");
+            return new EfUnitOfWork(efContext);
         }
 
         #endregion
