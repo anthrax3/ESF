@@ -4,7 +4,7 @@
   "dependencies": {
     "Core": "1.0.0-*",
     "NETStandard.Library": "1.6.1",
-    "Nofdev.Core": "1.0.0-*"
+    "Nofdev.Core": "1.0.0-rc1"
   },
 
   "frameworks": {
