@@ -27,5 +27,6 @@ namespace Enterprise.Repository
     public interface IUowFactory
     {
         IUnitOfWorkAsync Start(IRepositoryContextAsync context);
+        IUnitOfWorkAsync Start<T>() where T : class;
     }
 }

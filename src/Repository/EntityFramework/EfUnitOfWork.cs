@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Enterprise.Repository.EntityFramework
 {
-    public class EfUnitOfWork : UnitOfWork, IUnitOfWorkAsync
+    public class EfUnitOfWork :  IUnitOfWorkAsync
     {
-        private readonly IRepositoryContextAsync _context;
+        private  IRepositoryContextAsync _context;
         private readonly EfContext _efContext;
       
         private Dictionary<string, dynamic> _repositories;
         private IDbContextTransaction _transaction;
+        private bool _disposed;
 
         public EfUnitOfWork(EfContext context)
         {
@@ -21,20 +24,16 @@ namespace Enterprise.Repository.EntityFramework
         }
 
 
-        #region Overrides of UnitOfWork
+        #region Overrides of IUnitOfWork
 
 
-        public override void BeginTransaction()
+        public  void BeginTransaction()
         {
            _transaction =  _efContext.DbContext.Database.BeginTransaction();
         }
 
-        public override IRepository<TEntity> GetRepository<TEntity>()
-        {
-            return GetRepositoryAsync<TEntity>();
-        }
 
-        public override void Commit()
+        public  void Commit()
         {
             if (_transaction != null)
                 _transaction.Commit();
@@ -43,17 +42,14 @@ namespace Enterprise.Repository.EntityFramework
         }
 
 
-        public override void Rollback()
+        public  void Rollback()
         {
             _transaction.Rollback();
         }
 
-        protected override void DisposeRepository()
+        public IRepository<T> GetRepository<T>() where T : class, new()
         {
-            base.DisposeRepository();
-            _repositories?.Clear();
-           _transaction?.Dispose();
-            _context?.Dispose();
+            return GetRepositoryAsync<T>();
         }
 
         #endregion
@@ -100,6 +96,27 @@ namespace Enterprise.Repository.EntityFramework
         {
             return _context.SaveChangesAsync(cancellationToken);
         }
+
+        #region Implementation of IDisposable
+
+        public void Dispose()
+        {
+            if (_disposed)
+                return;
+          
+                _repositories?.Clear();
+                _transaction?.Dispose();
+
+                if (_context != null)
+                {
+                    _context.Dispose();
+                    _context = null;
+                }
+            
+            _disposed = true;
+        }
+
+        #endregion
     }
 
     public class UowFactory : IUowFactory
@@ -112,6 +129,13 @@ namespace Enterprise.Repository.EntityFramework
             if (efContext == null)
                 throw new InvalidCastException("context must be EfContext");
             return new EfUnitOfWork(efContext);
+        }
+
+        public IUnitOfWorkAsync Start<T>() where T : class
+        {
+            if (!typeof(T).GetTypeInfo().IsSubclassOf(typeof(DbContext)))
+                throw new InvalidCastException("T must be type of DbContext");
+            return new EfUnitOfWork(new EfContext(Activator.CreateInstance<T>() as DbContext));
         }
 
         #endregion
