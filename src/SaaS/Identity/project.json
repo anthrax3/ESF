@@ -1,15 +1,23 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Core": "1.0.0-*",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "NETStandard.Library": "1.6.1",
-    "Core": "1.0.0-*"
+    "Nofdev.Core": "1.0.0-rc1"
   },
 
   "frameworks": {
     "netstandard1.6.1": {
       "imports": "dnxcore50"
+    },
+
+    "netcoreapp1.1": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
     }
   }
 }

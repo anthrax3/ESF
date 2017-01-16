@@ -6,12 +6,20 @@
     "LinqKit.Microsoft.EntityFrameworkCore": "1.1.9",
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "Nofdev.Core": "1.0.0-rc1"
   },
 
   "frameworks": {
     "netstandard1.6.1": {
       "imports": "dnxcore50"
+    },
+
+    "netcoreapp1.1": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
     }
   }
 }

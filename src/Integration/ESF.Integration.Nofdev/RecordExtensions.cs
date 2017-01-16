@@ -2,7 +2,7 @@
 using Enterprise.Domain;
 using Nofdev.Core.SOA;
 
-namespace ESF.Integration.Nofdev
+namespace Enterprise.Integration.Nofdev
 {
     public static class RecordExtensions
     {

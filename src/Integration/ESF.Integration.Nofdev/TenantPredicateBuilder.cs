@@ -3,25 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 using Enterprise.Domain;
-using static LinqKit.PredicateBuilder;
+using Nofdev.Core.SOA;
 
-namespace Enterprise.Repository.EntityFramework
+namespace Enterprise.Integration.Nofdev
 {
     public static class TenantPredicateBuilder
     {
-        //public static Expression<Func<TEntity, bool>> MakeExpression<TEntity>(this User user)
-        //{
-        //    //todo:if ITenant<>
-        //    if (typeof(TEntity).GetTypeInfo().IsSubclassOf(typeof(ITenant)) && !string.IsNullOrWhiteSpace(user?.TenantId))
-        //    {
-        //        Expression<Func<ITenant, bool>> q = i => i.TenantId == user.TenantId;
-        //        var filter = q.ChangeParameter<TEntity>();
-        //        return filter;
-        //    }
-        //    return New<TEntity>();
-        //}
+        public static Expression<Func<TEntity, bool>> MakeExpression<TEntity>(this User user)
+        {
+            if (typeof(TEntity).GetTypeInfo().IsSubclassOf(typeof(ITenant)) && !string.IsNullOrWhiteSpace(user?.TenantId))
+            {
+                Expression<Func<ITenant, bool>> q = i => i.TenantId == user.TenantId;
+                var filter = q.ChangeParameter<TEntity>();
+                return filter;
+            }
+            return True<TEntity>();
+        }
+
+        /// <summary>
+        /// True子句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> True<T>()
+        {
+            return f => true;
+        }
+
 
         /// <summary>
         /// 转换 Lambda 表达式中的第一个参数为 {T} 类型。
