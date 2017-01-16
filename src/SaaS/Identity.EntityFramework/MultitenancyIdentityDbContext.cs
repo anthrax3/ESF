@@ -19,25 +19,10 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         where TUser :
             MultitenancyUser
     {
-        ///// <summary>
-        ///// Applies custom model definitions for multi-tenancy.
-        ///// </summary>
-        ///// <param name="modelBuilder">The builder that defines the model for the context being created. </param>
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        public MultitenancyIdentityDbContext(DbContextOptions options) : base(options)
+        {
 
-        //    modelBuilder.Entity<TUser>()
-        //        .Property(e => e.TenantId)
-        //        .HasMaxLength(128)
-        //        .IsRequired()
-        //        .HasColumnAnnotation(
-        //            "Index",
-        //            new IndexAnnotation(new IndexAttribute("UserNameIndex", order: 0)
-        //                {
-        //                    IsUnique = true
-        //                }));
-        //}
+        }
     }
 
     /// <summary>
@@ -70,6 +55,12 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         where TLog : MultitenancyAuditLog<TKey, TKey, TTenantKey>
         where TKey : IEquatable<TKey>
     {
+
+        public MultitenancyIdentityDbContext(DbContextOptions options) : base(options)
+        {
+            
+        }
+        
         public DbSet<TOrg> OrganizationUnits { get; set; }
         public DbSet<TUserOrg> UserOrganizations { get; set; }
         public DbSet<TLog> AuditLogs { get; set; }
