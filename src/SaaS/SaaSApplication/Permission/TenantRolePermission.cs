@@ -3,7 +3,7 @@ using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application.Permission
 {
-    public class MultitenancyRolePermission : MultitenancyRolePermission<int, string, string, string, string>,ICreationInfo,IUpdatingInfo
+    public class TenantRolePermission : MultitenancyRolePermission<int, string, string, string, string>,ICreationInfo,IUpdatingInfo
     {
     }
 

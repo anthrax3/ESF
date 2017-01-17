@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application
 {
-    public class TenantSubscription
+    public class TenantSubscription : ITenant
     {
         public string TenantId { get; set; }
         public string AppId { get; set; }

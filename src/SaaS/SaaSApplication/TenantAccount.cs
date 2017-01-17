@@ -1,8 +1,9 @@
 ﻿using System;
+using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application
 {
-    public class TenantAccount
+    public class TenantAccount : ITenant
     {
         public int Id { get; set; }
         public string TenantId { get; set; }
@@ -18,7 +19,7 @@ namespace Enterprise.SaaS.Application
         public DateTime? UpdatedDate { get; set; }
     }
 
-    public class TenantAccountTransaction
+    public class TenantAccountTransaction : ITenant
     {
         public int Id { get; set; }
         public int AccountId { get; set; }
@@ -30,5 +31,11 @@ namespace Enterprise.SaaS.Application
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
+
+        #region Implementation of ITenant<string>
+
+        public string TenantId { get; set; }
+
+        #endregion
     }
 }

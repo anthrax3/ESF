@@ -4,7 +4,7 @@ using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application.Permission
 {
-    public class MultitenancyUserPermission : MultitenancyUserPermission<int, string, string, string>,ICreationInfo,IUpdatingInfo
+    public class TenantUserPermission : MultitenancyUserPermission<int, string, string, string>,ICreationInfo,IUpdatingInfo
     {
     }
 

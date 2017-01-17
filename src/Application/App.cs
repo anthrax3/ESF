@@ -36,4 +36,9 @@ namespace Enterprise.Application
         public string FeatureId { get; set; }
     }
 
+    public class AppSetting : BaseEntity<Guid, string>
+    {
+        public string Value { get; set; }
+        public string AppId { get; set; }
+    }
 }

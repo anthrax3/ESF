@@ -18,7 +18,5 @@ namespace Enterprise.Application.Permissions
         public TRelatedKey ReferenceId { get; set; }
 
         public TPermission PermissionId { get; set; }
-
-        public bool IsGranted { get; set; }
     }
 }
