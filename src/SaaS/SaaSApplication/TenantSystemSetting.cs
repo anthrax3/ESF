@@ -3,7 +3,7 @@ using Enterprise.Domain;
 
 namespace Enterprise.SaaS.Application
 {
-    public class TenantAppSetting : AppSetting,ITenant
+    public class TenantSystemSetting : SystemSetting,ITenant
     {
         #region Implementation of ITenant<string>
 

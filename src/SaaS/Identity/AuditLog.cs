@@ -2,7 +2,7 @@
 
 namespace Enterprise.SaaS.Identity
 {
-    public class AuditLog<T,TUser> : ImmutableModel<T, TUser>
+    public class AuditLog<TKey,TUser> : ImmutableModel<TKey, TUser>
     {
         public string ClientCode { get; set; }
         public string ClientVersion { get; set; }

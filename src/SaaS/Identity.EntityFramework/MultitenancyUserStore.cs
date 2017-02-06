@@ -53,7 +53,7 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         where TUserRole : MultitenancyUserRole<TKey, TTenantKey>, new() 
         where TUserClaim : MultitenancyUserClaim<TKey, TTenantKey>, new() 
         where TUserToken : MultitenancyUserToken<TKey, TTenantKey>, new() 
-        where TRole : IdentityRole<TKey, TUserRole, TRoleClaim> 
+        where TRole : MultitenancyRole<TKey,TTenantKey, TUserRole, TRoleClaim> 
         where TRoleClaim : MultitenancyRoleClaim<TKey,TTenantKey>
     {
 
@@ -66,7 +66,7 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         /// <summary>
         /// Gets or sets the <see cref="ITenant{TTenantKey}.TenantId"/> to be used in queries.
         /// </summary>
-        public virtual TTenantKey TenantId { get; set; }
+        public  TTenantKey TenantId { get; set; }
 
         /// <summary>
         /// Gets the set of user logins.

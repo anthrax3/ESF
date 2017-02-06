@@ -31,4 +31,13 @@ namespace Enterprise.Integration.Nofdev
 
         #endregion
     }
+
+    public class TenantProvider : ITenantProvider<string>
+    {
+        #region Implementation of ITenantProvider<out string>
+
+        public string TenantId => ServiceContext.Current?.User?.TenantId;
+
+        #endregion
+    }
 }

@@ -41,8 +41,8 @@ namespace Enterprise.SaaS.Identity
         : IdentityUser<TKey, TUserClaim, TUserRole, TLogin>, ITenant<TTenantKey>,
         IMutableModel<TKey,TKey> 
         where TLogin : MultitenancyUserLogin<TKey, TTenantKey>
-        where TUserRole : IdentityUserRole<TKey>
-        where TUserClaim : IdentityUserClaim<TKey>
+        where TUserRole : MultitenancyUserRole<TKey,TTenantKey>
+        where TUserClaim : MultitenancyUserClaim<TKey,TTenantKey>
         where TKey : IEquatable<TKey>
     {
         public MultitenancyUser()

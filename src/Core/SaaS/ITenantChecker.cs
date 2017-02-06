@@ -11,4 +11,9 @@ namespace Enterprise.SaaS
 
         Expression<Func<TEntity, bool>> MakeExpression<TEntity>();
     }
+
+    public interface ITenantProvider<out TTenantKey>
+    {
+        TTenantKey TenantId { get; }
+    }
 }

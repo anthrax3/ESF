@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
+using Enterprise.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,11 @@ namespace Enterprise.SaaS.Identity.EntityFramework
             : base(context, describer)
         {
         }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ITenant{TTenantKey}.TenantId"/> to be used in queries.
+        /// </summary>
+        public  TTenantKey TenantId { get; set; }
 
         #region Overrides of RoleStore<TRole,TContext,TKey,TUserRole,TRoleClaim>
 
