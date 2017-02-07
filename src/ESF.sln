@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34D24CA5-4C84-48FF-B758-38BFA6ACF84E}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,23 +10,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{482661E1-E998-4884-8119-25C9FCE2B427}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.Core", "Core\ESF.Core.xproj", "{ACAA3410-2C19-4BBF-8AA3-D3A8522FEDBC}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.Repository.EntityFramework", "Repository\EntityFramework\ESF.Repository.EntityFramework.xproj", "{E5727C21-0153-47C0-A5E2-E1BEEFC73EF1}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.Application", "Application\ESF.Application.xproj", "{BB329457-A403-4118-9513-D83B16D058FB}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.SaaS.Identity", "SaaS\Identity\ESF.SaaS.Identity.xproj", "{EA20879E-819C-45AC-96E4-A1525E5A7EF7}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.SaaS.Identity.EntityFramework", "SaaS\Identity.EntityFramework\ESF.SaaS.Identity.EntityFramework.xproj", "{AB5C85DD-C3C9-45D7-A98B-B2BCBA7683A0}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.SaaS.Application", "SaaS\SaaSApplication\ESF.SaaS.Application.xproj", "{1ACD7D47-FBB6-43B4-9248-1046683BCD6B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SaaS", "SaaS", "{35D33C3C-1516-4250-8FB3-2BD888ED31BF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ESF.Integration.Nofdev", "Integration\ESF.Integration.Nofdev\ESF.Integration.Nofdev.xproj", "{3C07955E-2364-4EFF-AB81-D15DE78990CC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{44B081C6-E669-44F4-B427-8C3A445A4942}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{ACAA3410-2C19-4BBF-8AA3-D3A8522FEDBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework", "Repository\EntityFramework\EntityFramework.csproj", "{E5727C21-0153-47C0-A5E2-E1BEEFC73EF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{BB329457-A403-4118-9513-D83B16D058FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "SaaS\Identity\Identity.csproj", "{EA20879E-819C-45AC-96E4-A1525E5A7EF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.EntityFramework", "SaaS\Identity.EntityFramework\Identity.EntityFramework.csproj", "{AB5C85DD-C3C9-45D7-A98B-B2BCBA7683A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaaSApplication", "SaaS\SaaSApplication\SaaSApplication.csproj", "{1ACD7D47-FBB6-43B4-9248-1046683BCD6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESF.Integration.Nofdev", "Integration\ESF.Integration.Nofdev\ESF.Integration.Nofdev.csproj", "{3C07955E-2364-4EFF-AB81-D15DE78990CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,13 +67,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{35D33C3C-1516-4250-8FB3-2BD888ED31BF} = {482661E1-E998-4884-8119-25C9FCE2B427}
 		{ACAA3410-2C19-4BBF-8AA3-D3A8522FEDBC} = {482661E1-E998-4884-8119-25C9FCE2B427}
 		{E5727C21-0153-47C0-A5E2-E1BEEFC73EF1} = {482661E1-E998-4884-8119-25C9FCE2B427}
 		{BB329457-A403-4118-9513-D83B16D058FB} = {482661E1-E998-4884-8119-25C9FCE2B427}
 		{EA20879E-819C-45AC-96E4-A1525E5A7EF7} = {35D33C3C-1516-4250-8FB3-2BD888ED31BF}
 		{AB5C85DD-C3C9-45D7-A98B-B2BCBA7683A0} = {35D33C3C-1516-4250-8FB3-2BD888ED31BF}
 		{1ACD7D47-FBB6-43B4-9248-1046683BCD6B} = {35D33C3C-1516-4250-8FB3-2BD888ED31BF}
-		{35D33C3C-1516-4250-8FB3-2BD888ED31BF} = {482661E1-E998-4884-8119-25C9FCE2B427}
 		{3C07955E-2364-4EFF-AB81-D15DE78990CC} = {482661E1-E998-4884-8119-25C9FCE2B427}
 	EndGlobalSection
 EndGlobal
