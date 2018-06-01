@@ -36,10 +36,12 @@ namespace Enterprise.Application
         public string FeatureId { get; set; }
     }
 
-    public class SystemSetting : BaseEntity<Guid, string>
+    public class SystemSetting : BaseEntity<Guid, string>, IHasBuiltIn, ICreationInfo, IUpdatingInfo
     {
         public string Value { get; set; }
         public string AppId { get; set; }
+
+        public bool IsBuiltIn { get; set; }
     }
 
     public class AppSettings

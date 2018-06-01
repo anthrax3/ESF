@@ -14,14 +14,16 @@ namespace Enterprise.SaaS.Identity.EntityFramework
     /// <summary>
     ///     The store for a multi tenant user.
     /// </summary>
-    /// <typeparam name="TUser">The type of user.</typeparam>
     /// <typeparam name="TContext"></typeparam>
-    public class MultitenancyUserStore<TUser, TContext>
+    /// <typeparam name="TUser">The type of user.</typeparam>
+    /// <typeparam name="TRole"></typeparam>
+    public class MultitenancyUserStore<TContext,TUser,TRole>
         :
             MultitenancyUserStore
-                < TContext,TUser, MultitenancyRole, string, string, MultitenancyUserClaim, MultitenancyUserRole,
+                < TContext,TUser, TRole, string, string, MultitenancyUserClaim, MultitenancyUserRole,
                     MultitenancyUserLogin, MultitenancyUserToken,MultitenancyRoleClaim>
         where TUser : MultitenancyUser<string, string, MultitenancyUserLogin, MultitenancyUserRole, MultitenancyUserClaim>
+        where TRole : MultitenancyRole<string, string>
         where TContext : DbContext
     {
         public MultitenancyUserStore(TContext context, IdentityErrorDescriber describer = null)
@@ -53,8 +55,8 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         where TUserRole : MultitenancyUserRole<TKey, TTenantKey>, new() 
         where TUserClaim : MultitenancyUserClaim<TKey, TTenantKey>, new() 
         where TUserToken : MultitenancyUserToken<TKey, TTenantKey>, new() 
-        where TRole : MultitenancyRole<TKey,TTenantKey, TUserRole, TRoleClaim> 
-        where TRoleClaim : MultitenancyRoleClaim<TKey,TTenantKey>
+        where TRole : MultitenancyRole<TKey,TTenantKey> 
+        where TRoleClaim : MultitenancyRoleClaim<TKey,TTenantKey>, new()
     {
 
         /// <summary>
@@ -97,27 +99,27 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         }
 
 
-        public override Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken = new CancellationToken())
-        {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
-            if (login == null)
-                throw new ArgumentNullException(nameof(login));
+        //public override Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken = new CancellationToken())
+        //{
+        //    if (user == null)
+        //        throw new ArgumentNullException(nameof(user));
+        //    if (login == null)
+        //        throw new ArgumentNullException(nameof(login));
 
-            ThrowIfInvalid();
+        //    ThrowIfInvalid();
 
-            var userLogin = new TUserLogin
-            {
-                TenantId = TenantId,
-                UserId = user.Id,
-                ProviderKey = login.ProviderKey,
-                LoginProvider = login.LoginProvider,
-            };
+        //    var userLogin = new TUserLogin
+        //    {
+        //        TenantId = TenantId,
+        //        UserId = user.Id,
+        //        ProviderKey = login.ProviderKey,
+        //        LoginProvider = login.LoginProvider,
+        //    };
+            
+        //   user.Logins.Add(userLogin);
 
-           user.Logins.Add(userLogin);
-
-            return Task.FromResult(0);
-        }
+        //    return Task.FromResult(0);
+        //}
 
         /// <summary>
         /// Fins a user bases on their external login.
@@ -160,70 +162,70 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         }
 
 
-        protected override TUserRole CreateUserRole(TUser user, TRole role)
-        {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
-            if (role == null)
-                throw new ArgumentNullException(nameof(role));
+        //protected override TUserRole CreateUserRole(TUser user, TRole role)
+        //{
+        //    if (user == null)
+        //        throw new ArgumentNullException(nameof(user));
+        //    if (role == null)
+        //        throw new ArgumentNullException(nameof(role));
 
-            ThrowIfInvalid();
+        //    ThrowIfInvalid();
 
-            var userRole = new TUserRole
-            {
-                UserId = user.Id,
-                RoleId = role.Id,
-                TenantId = TenantId
-            };
+        //    var userRole = new TUserRole
+        //    {
+        //        UserId = user.Id,
+        //        RoleId = role.Id,
+        //        TenantId = TenantId
+        //    };
 
-            user.Roles.Add(userRole);
+        //    user.Roles.Add(userRole);
 
-            return userRole;
-        }
+        //    return userRole;
+        //}
 
-        protected override TUserClaim CreateUserClaim(TUser user, Claim claim)
-        {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
-            if (claim == null)
-                throw new ArgumentNullException(nameof(claim));
+        //protected override TUserClaim CreateUserClaim(TUser user, Claim claim)
+        //{
+        //    if (user == null)
+        //        throw new ArgumentNullException(nameof(user));
+        //    if (claim == null)
+        //        throw new ArgumentNullException(nameof(claim));
 
-            ThrowIfInvalid();
+        //    ThrowIfInvalid();
 
-            var userClaim = new TUserClaim
-            {
-                TenantId = TenantId,
-                UserId = user.Id,
-                ClaimType = claim.Type,
-                ClaimValue = claim.Value
-            };
+        //    var userClaim = new TUserClaim
+        //    {
+        //        TenantId = TenantId,
+        //        UserId = user.Id,
+        //        ClaimType = claim.Type,
+        //        ClaimValue = claim.Value
+        //    };
 
-            user.Claims.Add(userClaim);
+        //    user.Claims.Add(userClaim);
 
-            return userClaim;
-        }
+        //    return userClaim;
+        //}
 
-        protected override TUserLogin CreateUserLogin(TUser user, UserLoginInfo login)
-        {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user));
-            if (login == null)
-                throw new ArgumentNullException(nameof(login));
+        //protected override TUserLogin CreateUserLogin(TUser user, UserLoginInfo login)
+        //{
+        //    if (user == null)
+        //        throw new ArgumentNullException(nameof(user));
+        //    if (login == null)
+        //        throw new ArgumentNullException(nameof(login));
 
-            ThrowIfInvalid();
+        //    ThrowIfInvalid();
 
-            var userLogin = new TUserLogin
-            {
-                TenantId = TenantId,
-                UserId = user.Id,
-                ProviderKey = login.ProviderKey,
-                LoginProvider = login.LoginProvider,
-            };
+        //    var userLogin = new TUserLogin
+        //    {
+        //        TenantId = TenantId,
+        //        UserId = user.Id,
+        //        ProviderKey = login.ProviderKey,
+        //        LoginProvider = login.LoginProvider,
+        //    };
 
-            user.Logins.Add(userLogin);
+        //    user.Logins.Add(userLogin);
 
-            return userLogin;
-        }
+        //    return userLogin;
+        //}
 
         protected override  TUserToken CreateUserToken(TUser user, string loginProvider, string name, string value)
         {

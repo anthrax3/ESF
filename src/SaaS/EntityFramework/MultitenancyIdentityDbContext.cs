@@ -1,5 +1,6 @@
 ﻿using System;
 using Enterprise.Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,19 +10,19 @@ namespace Enterprise.SaaS.Identity.EntityFramework
     ///     Identity <see cref="DbContext" /> for multi tenant user accounts.
     /// </summary>
     /// <typeparam name="TUser">The type of user.</typeparam>
-    public class MultitenancyIdentityDbContext<TUser>
-        : MultitenancyIdentityDbContext<TUser, MultitenancyRole, MultitenancyOrganizationUnit, string, string,
+    /// <typeparam name="TRole">The type of role.</typeparam>
+    public class MultitenancyIdentityDbContext<TUser,TRole>
+        : MultitenancyIdentityDbContext<TUser, TRole, MultitenancyOrganizationUnit, string, string,
             MultitenancyUserClaim, MultitenancyUserRole,
             MultitenancyUserLogin, MultitenancyUserToken,
             MultitenancyUserOrganization,
-              MultitenancyRoleClaim, 
- MultitenancyAuditLog>
-        where TUser :
-            MultitenancyUser
+            MultitenancyRoleClaim,
+            MultitenancyAuditLog>
+        where TUser : MultitenancyUser
+        where TRole : MultitenancyRole
     {
         public MultitenancyIdentityDbContext(DbContextOptions options) : base(options)
         {
-
         }
     }
 
@@ -30,8 +31,8 @@ namespace Enterprise.SaaS.Identity.EntityFramework
     /// </summary>
     /// <typeparam name="TUser">The type of user.</typeparam>
     /// <typeparam name="TRole">The type of role.</typeparam>
-    /// <typeparam name="TKey">The type of <see cref="IdentityUser{TKey}.Id" /> for a user.</typeparam>
-    /// <typeparam name="TTenantKey">The type of <see cref="ITenant{TTenantKey}.TenantId" /> for a user.</typeparam>
+    /// <typeparam name="TKey">The type of <see cref="IdentityUser.Id" /> for a user.</typeparam>
+    /// <typeparam name="TTenantKey">The type of <see cref="ITenant.TenantId" /> for a user.</typeparam>
     /// <typeparam name="TUserLogin">The type of user login.</typeparam>
     /// <typeparam name="TUserRole">The type of user role.</typeparam>
     /// <typeparam name="TUserClaim">The type of user claim.</typeparam>
@@ -41,10 +42,10 @@ namespace Enterprise.SaaS.Identity.EntityFramework
     /// <typeparam name="TUserOrg">The type of user organization relationship.</typeparam>
     /// <typeparam name="TLog">The type of audit log.</typeparam>
     public class MultitenancyIdentityDbContext<TUser, TRole, TOrg, TKey, TTenantKey, TUserClaim, TUserRole, TUserLogin,
-        TUserToken,  TUserOrg,TRoleClaim,  TLog>
+            TUserToken, TUserOrg, TRoleClaim, TLog>
         : IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken>
         where TUser : MultitenancyUser<TKey, TTenantKey, TUserLogin, TUserRole, TUserClaim>
-        where TRole : MultitenancyRole<TKey, TTenantKey, TUserRole, TRoleClaim>
+        where TRole : MultitenancyRole<TKey, TTenantKey>
         where TRoleClaim : MultitenancyRoleClaim<TKey, TTenantKey>
         where TUserLogin : MultitenancyUserLogin<TKey, TTenantKey>, new()
         where TUserRole : MultitenancyUserRole<TKey, TTenantKey>, new()
@@ -55,12 +56,10 @@ namespace Enterprise.SaaS.Identity.EntityFramework
         where TLog : MultitenancyAuditLog<TKey, TKey, TTenantKey>
         where TKey : IEquatable<TKey>
     {
-
         public MultitenancyIdentityDbContext(DbContextOptions options) : base(options)
         {
-            
         }
-        
+
         public DbSet<TOrg> OrganizationUnits { get; set; }
         public DbSet<TUserOrg> UserOrganizations { get; set; }
         public DbSet<TLog> AuditLogs { get; set; }

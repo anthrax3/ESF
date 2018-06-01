@@ -1,17 +1,15 @@
 ﻿using System;
 using Enterprise.Domain;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Enterprise.SaaS.Identity
 {
-    public class MultitenancyRole : MultitenancyRole<string, string, MultitenancyUserRole,MultitenancyRoleClaim>
+    public class MultitenancyRole : MultitenancyRole<string, string>
     {
         
     }
 
-    public class MultitenancyRole<TKey, TTenantKey, TUserRole, TRoleClaim> : IdentityRole<TKey,TUserRole,TRoleClaim>, ITenant<TTenantKey> where TKey : IEquatable<TKey>
-    where TUserRole : MultitenancyUserRole<TKey,TTenantKey>
-    where TRoleClaim : MultitenancyRoleClaim<TKey, TTenantKey>
+    public class MultitenancyRole<TKey, TTenantKey> : IdentityRole<TKey>, ITenant<TTenantKey> where TKey : IEquatable<TKey>
     {
         public TTenantKey TenantId { get; set; }
     }

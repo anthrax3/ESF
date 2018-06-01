@@ -16,4 +16,8 @@ namespace Enterprise.SaaS
     {
         TTenantKey TenantId { get; }
     }
+
+    public interface ITenantProvider : ITenantProvider<string>
+    {
+    }
 }

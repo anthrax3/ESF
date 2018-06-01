@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Enterprise.Domain;
 
 namespace Enterprise.Application
@@ -12,9 +13,19 @@ namespace Enterprise.Application
     {
         public TFKey DictionaryId { get; set; }
         public int Ordinal { get; set; }
+
+        /// <summary>
+        /// Alias of Description
+        /// </summary>
+        [NotMapped]
+        public string Value
+        {
+            get { return Description; }
+            set { Description = value; }
+        }
     }
 
-    public class DataDictionary : DataDictionary<Guid,string>,IHasBuiltIn
+    public class DataDictionary : DataDictionary<Guid,string>,IHasBuiltIn, ICreationInfo, IUpdatingInfo
     {
         public DataDictionary()
         {
@@ -32,7 +43,7 @@ namespace Enterprise.Application
         #endregion
     }
 
-    public class DataItem : DataItem<Guid, string, string>,IHasBuiltIn
+    public class DataItem : DataItem<Guid, string, string>,IHasBuiltIn, ICreationInfo, IUpdatingInfo
     {
         public DataItem()
         {

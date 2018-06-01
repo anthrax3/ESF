@@ -1,6 +1,6 @@
 ﻿using System;
 using Enterprise.Domain;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Enterprise.SaaS.Identity
 {
@@ -38,7 +38,7 @@ namespace Enterprise.SaaS.Identity
     /// <typeparam name="TUserRole">The type of user role.</typeparam>
     /// <typeparam name="TUserClaim">The type of user claim.</typeparam>
     public class MultitenancyUser<TKey, TTenantKey, TLogin, TUserRole, TUserClaim>
-        : IdentityUser<TKey, TUserClaim, TUserRole, TLogin>, ITenant<TTenantKey>,
+        : IdentityUser<TKey>, ITenant<TTenantKey>,
         IMutableModel<TKey,TKey> 
         where TLogin : MultitenancyUserLogin<TKey, TTenantKey>
         where TUserRole : MultitenancyUserRole<TKey,TTenantKey>
@@ -47,12 +47,14 @@ namespace Enterprise.SaaS.Identity
     {
         public MultitenancyUser()
         {
+            CreatedDate = DateTime.Now;
         }
 
         public MultitenancyUser(string userName) : base(userName)
         {
             if (string.IsNullOrWhiteSpace(userName))
                 throw new ArgumentNullException(nameof(userName));
+            CreatedDate = DateTime.Now;
         }
 
         /// <summary>

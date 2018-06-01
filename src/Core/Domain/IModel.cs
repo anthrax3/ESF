@@ -133,7 +133,7 @@ namespace Enterprise.Domain
         public string Description { get; set; }
     }
 
-    public abstract class BaseEntity : BaseEntity<int,string>
+    public abstract class BaseEntity : BaseEntity<Guid,string>,ICreationInfo,IUpdatingInfo
     {
         
     }

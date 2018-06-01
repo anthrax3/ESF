@@ -1,6 +1,6 @@
 ﻿using System;
 using Enterprise.Domain;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Enterprise.SaaS.Identity
 {
